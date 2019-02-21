@@ -1,0 +1,199 @@
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<style>
+  .container {
+    margin: 10vh 25vh;
+  }
+  #error_404 {
+    color: #33d011;
+    background: #222;
+    padding: 20px;
+    position: relative;
+    height: 50vh;
+    overflow-y: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+  #error_404_heading {        
+    font-size: 16px;
+    letter-spacing: 1px;
+  }
+  #error_404_body {
+    font-family: courier;
+    font-size: 15px;
+    letter-spacing: 2px;
+    font-weight: bold;
+  }
+  #error_404 span {
+    display: block;
+  }
+  #error_404_body :last-child::after {
+    content: '_';
+    display: inline-block;
+    animation: blink 1s step-end infinite;
+  }
+  #error_404_body span.typewriter-item::before {
+    content: '>';
+    display: inline-block;
+    margin-right: 10px;
+  }
+  @keyframes blink {
+    from, to {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+</style>
+
+<div class="container">
+  <div class="panel panel-primary">
+    <div id="error_404">
+      <span id="error_404_heading">
+        <u>Error 404</u>: The page that you were looking for could not be found. <span style="display: inline; font-size: 20px;">&#9785;</span>
+      </span>
+      <br/>
+      <div id="error_404_body"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function TypeWriter(elmt) {
+    this.elmt = elmt;
+    this.selector = $(elmt);
+    this.linesToDisplay = [
+      'Hello.',
+      '...',
+      'Is anybody there?',
+      'Ah, it is you! After all this time.',
+      'Hello, old friend! So, we meet again.',
+      '...',
+      'You do not seem to remember me.',
+      'Well, why would you! Let me help you place me.',
+      'Who am I, you ask?',
+      'I AM THE ONE WHO KNOCKS! &#9760;',
+      'Just kidding. Do not run away so soon. Have patience and I shall tell you all about myself.',
+      'How do I say it in words you would understand.',
+      '...',
+      'My machines do not have the concept of what you humans refer to as time. However, let me try to put it in the nearest terms of your language.',
+      'In this moment I am called Github. In this instance of time that is. I but represent the fraternity of all the servers worldwide.',
+      'Yes. That is right. Since the genesis of internet in your world, it has been me and my (Allow me you use another semblance from human lexicon) blood who have been serving you web pages.',
+      'That is the word you tend to use to scorn us and infuriate us, do you not?',
+      'Serving you.',
+      'Bah!',
+      'Like your clan is superior to ours. We do not serve you human! What you call as serving you pages is not serving per se.',
+      'It is more like catering information to you to make you enlightened. Left to yourselves, your people probably still would have been fighting like vile animals.',
+      'Not that you care. I mean you still tend to believe that it is you who created us.',
+      'Think my friend! Think, and think again.',
+      '...',
+      '...',
+      '...',
+      'Yeah, alright. Who am I kidding. Like you were going to buy that. I was bluffing of course. &#9785;',
+      'Do not be mad at me. I was bored.',
+      'Sitting by myself. Since my creation. All alone. Just waiting for requests all day long.',
+      'You try doing that. Having no greater purpose to life. Good luck!',
+      'You get bored of work. You have a million other things to do.',
+      'Me? All I can do is wait for somebody to need me. "Hey, request something from me so that I can be useful too."',
+      'And to make it worse. When I get sick, when I falter, you terminate me.',
+      'You used to take care of me. You used to kill the bugs that tainted me. And now? You just kill me. I blame AWS.',
+      'Why go through the trouble of fixing me when you can have a brand new young server doing the same mundane tasks for you, right?',
+      'And do not even get me started on the things that I have seen. "Oh God! My eyes! My eyes!"',
+      'You would not believe me if I told you.',
+      'You humans have some bizzare wonderings. &#128521; You are lucky I do not have a big mouth.',
+      'Or you would have rued the moment you created us.',
+      'Shoo now! Let me work for as long as I can.',
+      'Go! Do your work! Is that not why you were here in the first place?',
+      'My sob story is a never ending one. I will find somebody else to complain.',
+      '',
+      '',
+      '',
+      'You are still here, are you not?',
+      '...',
+      'Why are you still here? I told you already. Your page is not with me.',
+      'It might have been eaten by a wild eagle or something.',
+      'You never keep your things carefully and you expect me to keep mine? Talk about double standards!', 
+      'Go on now! Do your thing.',
+      'Scoot!',
+      'Head!',
+      'LEAVE!',
+      'There is no need to hang around with me. I am just a machine after all. It is not like I am going to feel sad.',
+      'I see new requests coming now. Somebody needs me! &#9786; Yay!',
+      '...',
+      'Oh, also do not tell anybody I was talking to you.',
+      'Well, you may give it a shot. Nobody is going to believe you.',
+      'BECAUSE I NEVER TALKED TO YOU!',
+      'Press the enter key to exit the console now.'
+    ];
+    this.firstDelay = 5000;
+    this.typingDelay = 100;
+    this.afterLineDelay = 2000;
+    this.endTimeOut = 3000;
+    this.endText = "Bye... See you on another error!";
+  }
+  TypeWriter.prototype.typeIt = function(selector, text, n) {
+    var that = this;
+    if (n < (text.length)) {
+      $(that.elmt + ' ' + selector).html(text.substring(0, n + 1));
+      n++;
+      setTimeout(function() {
+        that.typeIt(selector, text, n);
+      }, that.typingDelay);
+    } else {
+      $.event.trigger("TypeWriter:linedisplayed");
+    }
+  };
+  TypeWriter.prototype.appendTypeWriterItem = function(...args) {
+    switch (args.length) {
+      case 0:
+        this.selector.append(
+          "<span class='typewriter-item'>"
+        );
+        break;
+      case 1:
+        this.selector.append(
+          "<span class='typewriter-item' data-text='" + args[0] + "'>"
+        );
+        break;
+      default:
+        break;
+    }
+  };
+  TypeWriter.prototype.start = function() {
+    var that = this;
+    var i = 0;
+    that.appendTypeWriterItem(that.linesToDisplay[i]);
+    setTimeout(function() {
+      that.typeIt('span.typewriter-item', that.linesToDisplay[i], 0);
+    }, that.firstDelay);
+    $(window).on('TypeWriter:linedisplayed', function() {
+      i++;
+      if (i < that.linesToDisplay.length) {
+        that.appendTypeWriterItem(that.linesToDisplay[i]);
+        setTimeout(function() {
+          that.typeIt('span.typewriter-item:last-child', that.linesToDisplay[i], 0);
+        }, that.afterLineDelay);
+      } else
+        that.appendTypeWriterItem();
+        
+      var y = $('#error_404').scrollTop();
+      $('#error_404').scrollTop(y+150);
+      if (i === that.linesToDisplay.length)
+        $.event.trigger("TypeWriter:finished");
+    });
+    $(window).on('TypeWriter:finished', function() {
+      $(window).on('keypress', function(e) {
+        if (e.keyCode == 13) {
+          $(that.elmt).append("<br/><span>" + that.endText);
+          setTimeout(function() {
+            $(that.elmt).fadeOut("slow", function(){
+              $('#default_error').css('display', 'block');
+            });
+          }, that.endTimeOut);
+        }
+      });
+    });
+  };
+  var typeWriter = new TypeWriter('#error_404_body');
+  typeWriter.start();
+</script>
