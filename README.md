@@ -1,9 +1,9 @@
 # saranshkg.github.io
 
-One-page online portfolio to highlight my portfolio, accomplishments and interests briefly.
+One pager to highlight my background, accomplishments and interests briefly.
 
 
-See you at [https://saranshkg.github.io/](https://saranshkg.github.io/)
+Check it out [here](https://saranshkg.github.io/) and feel free to suggest refinements.
 
 
 # Source
